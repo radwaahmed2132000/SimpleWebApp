@@ -9,15 +9,15 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $productController = new ProductController();
-if ($uri[3] == 'products' && $requestMethod == 'GET') {
-    echo"ok";
+if ($requestMethod == 'GET') {
+    echo"i am get";
     echo $productController->getAllProduct();
-} elseif ($uri[3] == 'products' && $requestMethod == 'POST') {
-    echo"ok";
+} elseif ($requestMethod == 'POST') {
+    echo"i am post";
     $input = (array) json_decode(file_get_contents('php://input'), true);
     echo $productController->createProduct($input);
-} elseif ($uri[3] == 'products' && $requestMethod == 'DELETE') {
-    echo"ok";
+} elseif ($requestMethod == 'DELETE') {
+    echo" i am delete";
     $input =  json_decode(file_get_contents('php://input'), true);
      echo $productController->deleteProduct($input);
 }
