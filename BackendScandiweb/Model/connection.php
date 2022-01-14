@@ -3,9 +3,9 @@
 class DBConnection
 {
     public $serverName = 'localhost'; // server ip
-    public $dbUserName = 'root';      // server acess username
-    public $dbUserNamePass = '';      // the password of the specified username, in this case there's no password, http://localhost/phpmyadmin/server_privileges.php?viewing_mode=server formore info
-    public $dbName = 'testapp';     // database name
+    public $dbUserName = 'id18293313_radwa';      // server acess username
+    public $dbUserNamePass = 'EwBA\eiS^%Gu9^E(';      // the password of the specified username, in this case there's no password, http://localhost/phpmyadmin/server_privileges.php?viewing_mode=server formore info
+    public $dbName = 'id18293313_newdb';     // database name
     private $dbConnection;
     public static $instance;
 
