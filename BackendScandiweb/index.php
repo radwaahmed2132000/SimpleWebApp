@@ -8,6 +8,7 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $productController = new ProductController();
+echo "get updated";
 if ($requestMethod == 'GET') {
     echo"i am get";
     echo $productController->getAllProduct();

@@ -17,6 +17,7 @@ class DBConnection
     {
         $this->dbConnection = mysqli_connect($this->serverName, $this->dbUserName, $this->dbUserNamePass, $this->dbName);
         if (!$this->dbConnection) {
+            echo "failed";
             die();
         }
     }
