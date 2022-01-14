@@ -3,11 +3,11 @@ CREATE TABLE products(
    sku text UNIQUE,
     name text,
     price integer,
-    weight integer ,
-    width integer,
-    height integer,
-    length integer,
-   size integer,
+    weight integer default null ,
+    width integer default null,
+    height integer default null,
+    length integer default null,
+   size integer default null,
    type text
     
 );
