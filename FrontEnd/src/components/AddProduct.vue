@@ -8,7 +8,8 @@
                 <div class="col-lg-4">
                      <b-button v-on:click="addProduct()"  class="mx-3">
                            Save
-                         <!-- <router-link to="/">
+<!--                       
+                         <router-link to="/">
                             Save
                         </router-link> -->
                      </b-button>
@@ -268,14 +269,17 @@ export default ({
                      if(!String(this.width).match(/^[0-9]+$/)){
                             this.invaliderrors++;
                     this.invalid=true;
+                  
                     }
                     else if(this.width<=0){
                             this.invaliderrors++;
                     this.invalid=true;
+                    
                     }
                      if(!String(this.height).match(/^[0-9]+$/)){
                             this.invaliderrors++;
                     this.invalid=true;
+               
                     }
                     else if(this.height<=0){
                             this.invaliderrors++;
@@ -291,6 +295,7 @@ export default ({
                     }
 
                }
+               console.log(this.invalid);
         },
         /**
          * add new product to system
@@ -311,9 +316,10 @@ export default ({
           else{
                this.missinghtml =true;
           }
-          // console.log(this.invalid);
+         
           let product ={};
           if( !this.missing && !this.invalid){
+              
                product.price = this.price;
                product.name= this.name;
                product.type= this.type;
@@ -329,19 +335,21 @@ export default ({
                     product.height= this.height;
                     product.length =this.length;
                }
-               // console.log(JSON.stringify(product));
+               console.log(JSON.stringify(product));
                const headers = { 
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                };
-          axios.post("https://scandiwebtaskradwa.000webhostapp.com/index.php/products",JSON.stringify(product),{headers})
+          axios.post("http://127.0.0.1/BackendScandiweb/index.php/products",JSON.stringify(product),{headers})
           .then( response=> {
                // sku is already exist
+               console.log(response.data.meta.msg);
                     if(response.data.meta.status!="200"){
                         
                        this.invalidhtml= true;
                     }
                     else{
+                        
                         this.invalidhtml= false;
                            this.$router.push("/");
                     }
