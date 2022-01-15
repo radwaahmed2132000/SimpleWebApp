@@ -68,7 +68,7 @@ class AddProductRequest
                 return false;
             }
         } elseif ($input['type'] == 'Furniture') {
-            if (array_key_exists('widtht', $input)) {
+            if (array_key_exists('width', $input)) {
                 if (!is_numeric($input['width'])) {
                     return false;
                 }
