@@ -81,6 +81,7 @@
 <script>
 
 import LineProduct from './LineProduct.vue';
+import axios from 'axios';
 
 export default ({
     name: 'Product',
@@ -92,68 +93,50 @@ export default ({
          return {
                products :[] ,
                count:0,
-               ids : []
+               ids : [],
+               data: [],
+               status:""
          };
     },
     methods :{
        getAllProducts : function()
        {
-           this.count =10;
-           console.log(this.count);
-           for(let i=0; i<this.count ;i++) {
-                this.products.push(
-                    {
-                    name: "Radwa",
-                    SKU:"fhh-12",
-                    type:"DVD",
-                    price :"12",
-                    width :"11" ,
-                    height:"12",
-                    length:"12",
-                    size:"12",
-                    weight:"12",
-
-                    id :String(i)
-                 }
-                );
-           }
-            for(let i=0; i<this.count ;i++) {
-                this.products.push(
-                    {
-                    name: "Radwa",
-                    SKU:"fhh-12",
-                    type:"Furniture",
-                    price :"12",
-                    width :"11" ,
-                    height:"12",
-                    length:"12",
-                    size:"12",
-                    weight:"12",
-
-                    id :String(i)
-                 }
-                );
-           }
-            for(let i=0; i<this.count ;i++) {
-                this.products.push(
-                    {
-                    name: "Radwa",
-                    SKU:"fhh-12",
-                    type:"Book",
-                    price :12.5,
-                    width :"11" ,
-                    height:"12",
-                    length:"12",
-                    size:"12",
-                    weight:"12",
-
-                    id :String(i)
-                 }
-                );
-           }
+          
+              axios.get('https://scandiwebtasg.000webhostapp.com')
+           .then(response=>
+               { 
+                   this.data = response.data.response;
+                    this.status= response.data.meta.status;
+                    if(this.status=="200"){
+                            this.count =this.data.length;
+    
+                    for(let i=0; i<this.count ;i++) {
+                            this.products.push(
+                                {
+                                name: this.data[i].name,
+                                SKU:this.data[i].sku,
+                                type: this.data[i].type,
+                                price :this.data[i].price,
+                                width :this.data[i].width ,
+                                height:this.data[i].height,
+                                length:this.data[i].length,
+                                size:this.data[i].size,
+                                weight:this.data[i].weight,
+                                id :String(this.data[i].id)
+                            }
+                            );
+                    }
+                    }    
+            
+           });
+    
+        
+           
+         
 
        },
        deleteProduct : function () {
+           
            for (let i=0;i< this.ids.length;i++){
                 console.log(this.ids[i]);
            }
