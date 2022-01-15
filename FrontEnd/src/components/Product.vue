@@ -1,0 +1,191 @@
+<template>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                      <h2>Product List</h2>
+                </div>
+                <div class="col-lg-4 buttons">
+                    <b-button >
+                         <router-link to="/AddProduct">
+                            ADD
+                        </router-link>
+                    </b-button>
+                     
+                    <b-button v-on:click="deleteProduct()" id="delete-product-btn">MASS DELETE</b-button>
+                </div>
+             
+    
+            </div>
+        </div>
+       
+       <LineProduct/>
+           
+               <div class="container mb-5">
+                   <div class="row">
+                      
+                       <div class="col-lg-3 my-2"  v-for="product in products" :key="product.id"  >
+                           
+                         <b-card-group >  
+                           <b-card  >  
+                                <b-form-checkbox class="delete-checkbox"
+                           
+                            v-model="ids"
+                            :value="product.id"
+                        >
+                    
+                        </b-form-checkbox>
+                        <br>
+                        <b-card-text v-if="product.type=='Furniture'">
+                          {{product.SKU}} <br>
+                          {{product.name}}<br>
+                         {{product.price}} $ <br>
+
+                          Dimension: {{product.width}}x{{product.height}}x{{product.length}}<br>
+                        </b-card-text>
+                          <b-card-text v-if="product.type=='DVD'">
+                          {{product.SKU}} <br>
+                          {{product.name}}<br>
+                          {{product.price}} $ <br>
+
+                          Size: {{product.size}} MB<br>
+                        </b-card-text>
+                         <b-card-text v-if="product.type=='Book'">
+                          {{product.SKU}} <br>
+                          {{product.name}}<br>
+                          {{product.price}} $ <br>
+
+                          Weight: {{product.weight}}KG<br>
+                        </b-card-text>
+
+                           <br>
+                          </b-card>
+                           </b-card-group >
+                       </div>
+                    
+            
+                   </div>
+               </div>
+                
+                
+           
+    <LineProduct/>
+    <h4>
+        Scandiweb Test Assignment
+    </h4>
+     
+       
+    </div> 
+
+</template>
+<script>
+
+import LineProduct from './LineProduct.vue';
+
+export default ({
+    name: 'Product',
+    components: {
+     LineProduct,
+ 
+   },
+    data : function () {
+         return {
+               products :[] ,
+               count:0,
+               ids : []
+         };
+    },
+    methods :{
+       getAllProducts : function()
+       {
+           this.count =10;
+           console.log(this.count);
+           for(let i=0; i<this.count ;i++) {
+                this.products.push(
+                    {
+                    name: "Radwa",
+                    SKU:"fhh-12",
+                    type:"DVD",
+                    price :"12",
+                    width :"11" ,
+                    height:"12",
+                    length:"12",
+                    size:"12",
+                    weight:"12",
+
+                    id :String(i)
+                 }
+                );
+           }
+            for(let i=0; i<this.count ;i++) {
+                this.products.push(
+                    {
+                    name: "Radwa",
+                    SKU:"fhh-12",
+                    type:"Furniture",
+                    price :"12",
+                    width :"11" ,
+                    height:"12",
+                    length:"12",
+                    size:"12",
+                    weight:"12",
+
+                    id :String(i)
+                 }
+                );
+           }
+            for(let i=0; i<this.count ;i++) {
+                this.products.push(
+                    {
+                    name: "Radwa",
+                    SKU:"fhh-12",
+                    type:"Book",
+                    price :12.5,
+                    width :"11" ,
+                    height:"12",
+                    length:"12",
+                    size:"12",
+                    weight:"12",
+
+                    id :String(i)
+                 }
+                );
+           }
+
+       },
+       deleteProduct : function () {
+           for (let i=0;i< this.ids.length;i++){
+                console.log(this.ids[i]);
+           }
+       }
+    },
+    
+  mounted () {
+    this.getAllProducts()
+}
+})
+</script>
+<style  >
+*{
+    margin: 0%;
+    padding: 0%;
+    color:black;
+}
+
+h2
+{
+    margin-right:30%;
+    
+}
+#delete-product-btn{
+  
+    margin-left:20% ;
+}
+
+button{
+    background: blue;
+}
+
+
+</style>
+
