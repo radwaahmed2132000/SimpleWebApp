@@ -35,11 +35,5 @@ router.beforeEach((to, from, next) => {
     next();
  
 });
-// router.afterEach((to) => {
-//   Vue.nextTick(() => {
-//     document.title = to.meta.title || "Instabug";
-//  });
-// });
-
  
 export default router;

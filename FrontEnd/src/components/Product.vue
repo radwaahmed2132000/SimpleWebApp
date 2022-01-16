@@ -91,21 +91,37 @@ export default ({
    },
     data : function () {
          return {
+             /**
+              * all products 
+              * @value array of product
+              */
                products :[] ,
+               /**
+                * number of products
+                */
                count:0,
+               /**
+                * ids of selected products
+                */
                ids : [],
                data: [],
-               status:""
+               status:"",
+               deletedIds: []
+               
          };
     },
     methods :{
+        /**
+         * get all products
+         * @return void
+         */
        getAllProducts : function()
        {
           
-              axios.get('https://scandiwebtasg.000webhostapp.com')
+            axios.get('https://scandiwebtasg.000webhostapp.com')
            .then(response=>
                { 
-                   this.data = response.data.response;
+                    this.data = response.data.response;
                     this.status= response.data.meta.status;
                     if(this.status=="200"){
                             this.count =this.data.length;
@@ -123,7 +139,7 @@ export default ({
                                 size:this.data[i].size,
                                 weight:this.data[i].weight,
                                 id :String(this.data[i].id)
-                            }
+                                 }
                             );
                     }
                     }    
@@ -135,11 +151,33 @@ export default ({
          
 
        },
-       deleteProduct : function () {
+       /**
+        * delete  selected products
+        * @return void
+        */
+      deleteProduct : function () {
            
            for (let i=0;i< this.ids.length;i++){
                 console.log(this.ids[i]);
+                this.deletedIds.push(
+                    {
+                        "id":this.ids[i]
+                    }
+                )
            }
+      
+           const headers = { 
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+           };
+           axios.post('https://scandiwebtasg.000webhostapp.com/index.php/del',this.deletedIds,{headers})
+           .then( response=> {
+                    this.delStatus =response.data.meta.status;
+                    console.log(this.delStatus);
+           }).catch(function(error) {
+                    console.log('What happened? ' + error.response);
+            });
+           this.deletedIds=[];
        }
     },
     
