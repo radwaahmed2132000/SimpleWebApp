@@ -117,8 +117,9 @@ export default ({
          */
        getAllProducts : function()
        {
+           this.products =[];
           
-            axios.get('https://scandiwebtasg.000webhostapp.com')
+            axios.get('http://127.0.0.1/BackendScandiweb/index.php/products')
            .then(response=>
                { 
                     this.data = response.data.response;
@@ -168,22 +169,21 @@ export default ({
       
            const headers = { 
             "Accept": "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
            };
-           axios.post('https://scandiwebtasg.000webhostapp.com/index.php/del',this.deletedIds,{headers})
-           .then( response=> {
-                    this.delStatus =response.data.meta.status;
-                    console.log(this.delStatus);
-           }).catch(function(error) {
-                    console.log('What happened? ' + error.response);
-            });
+           console.log(JSON.stringify(this.deletedIds));
+            axios.post("http://127.0.0.1/BackendScandiweb/index.php/del",JSON.stringify(this.deletedIds),{headers});
+    
            this.deletedIds=[];
+             this.getAllProducts();
        }
+       
     },
     
   mounted () {
     this.getAllProducts()
 }
+ , 
 })
 </script>
 <style  >

@@ -111,10 +111,10 @@
                             <b-card-text> Please provide dimensions in HxWxL format </b-card-text>
                 </b-col>
            </b-row>
-             <b-row class="my-3" v-if="missing==true">
+             <b-row class="my-3" v-if="missinghtml==true">
                   Please, submit required data
              </b-row>
-              <b-row class="my-3" v-if="invalid==true">
+              <b-row class="my-3" v-if="invalidhtml==true">
                  Please, provide the data of indicated type
              </b-row>
          </b-form>  
@@ -163,6 +163,8 @@ export default ({
                 */
                missing: false,
                invalid: false,
+               missinghtml:false,
+               invalidhtml:false,
                /**
                 *  errors numbers of missing & invalid
                 * @value 0
@@ -221,27 +223,34 @@ export default ({
                 if(!this.name.match(/^[A-Za-z]+$/)){
                     this.invalid= true;
                     this.invaliderrors++;
+                   
+                  
                }
                if(!String(this.price).match(/^[0-9]+$/)){
                     this.invaliderrors++;
                     this.invalid=true;
+                     
                }
                else if (this.price<=0){
                       this.invaliderrors++;
                     this.invalid=true;
+                    
                }
                if(!this.SKU.match(/^[a-z0-9]{10,20}$/i)){
                      this.invaliderrors++;
                     this.invalid=true;
+                    
                }
                if(this.type=='DVD'){
                     if(!String(this.size).match(/^[0-9]+$/)){
                             this.invaliderrors++;
                     this.invalid=true;
+                     
                     }
                     else if(this.size<=0){
                             this.invaliderrors++;
                     this.invalid=true;
+
                     }
                }
                if(this.type=='Book'){
@@ -291,13 +300,24 @@ export default ({
           this.checkMissing();
           if(!this.missing ){
               this.checkInvalid();
+              if(this.invalid){
+                   this.invalidhtml =true;
+              }
+              else{
+                   this.invalidhtml= false;
+              }
+              this.missinghtml=false;
           } 
+          else{
+               this.missinghtml =true;
+          }
+          console.log(this.invalid);
           let product ={};
           if( !this.missing && !this.invalid){
                product.price = this.price;
                product.name= this.name;
                product.type= this.type;
-               product.SKU= this.SKU;
+               product.sku= this.SKU;
                if(this.type == 'DVD'){
                  product.size= this.size;
                }
@@ -309,19 +329,21 @@ export default ({
                     product.height= this.height;
                     product.length =this.length;
                }
+               console.log(JSON.stringify(product));
                const headers = { 
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                };
-          axios.post('https://scandiwebtasg.000webhostapp.com/index.php/del',this.deletedIds,{headers})
+          axios.post("http://127.0.0.1/BackendScandiweb/index.php/products",JSON.stringify(product),{headers})
           .then( response=> {
+               // sku is already exist
                     if(response.data.meta.status!="200"){
-                         this.invalid = true;
-                         this.invaliderrors ++;
+                        
+                       this.invalidhtml= true;
                     }
                     else{
-                         console.log("done");
-                         //  this.$router.push("/");
+                        this.invalidhtml= false;
+                           this.$router.push("/");
                     }
                     
            });
