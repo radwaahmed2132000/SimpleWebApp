@@ -89,7 +89,7 @@
                          <label for="height">Height (CM)</label>
                 </b-col>
                  <b-col lg="6">
-                      <b-form-input  id="height" v-model="weight" min="1" placeholder="Enter your height" type="number" ></b-form-input>
+                      <b-form-input  id="height" v-model="height" min="1" placeholder="Enter your height" type="number" ></b-form-input>
 
                 </b-col>
            </b-row>
@@ -337,7 +337,7 @@ export default ({
                }
                console.log(JSON.stringify(product));
               
-          axios.post("https://scandiwebtaskradwabackend.azurewebsites.net/index.php/add",JSON.stringify(product))
+          axios.post("https://newoneagainadkjdkw.azurewebsites.net/index.php/add",JSON.stringify(product))
           .then( response=> {
                // sku is already exist
                console.log(response.data.meta.msg);

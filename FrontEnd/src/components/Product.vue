@@ -107,7 +107,7 @@ export default ({
        {
            this.products =[];
           
-            axios.get('https://scandiwebtaskradwabackend.azurewebsites.net/index.php/products')
+            axios.get('https://newoneagainadkjdkw.azurewebsites.net/index.php/products')
            .then(response=>
                { 
                     this.data = response.data.response;
@@ -158,7 +158,7 @@ export default ({
       
           
         //    console.log(JSON.stringify(this.deletedIds));
-            axios.post("https://scandiwebtaskradwabackend.azurewebsites.net/index.php/del",JSON.stringify(this.deletedIds));
+            axios.post("https://newoneagainadkjdkw.azurewebsites.net/index.php/del",JSON.stringify(this.deletedIds));
     
            this.deletedIds=[];
              this.getAllProducts();
