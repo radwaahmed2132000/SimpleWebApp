@@ -2,10 +2,10 @@
 
 class DBConnection
 {
-    public $serverName = 'localhost'; // server ip
-    public $dbUserName = 'id18293313_radwa';      // server acess username
-    public $dbUserNamePass = 'EwBA\eiS^%Gu9^E(';      // the password of the specified username, in this case there's no password, http://localhost/phpmyadmin/server_privileges.php?viewing_mode=server formore info
-    public $dbName = 'id18293313_newdb';     // database name
+    public $serverName = 'scandiwebtask.database.windows.net'; // server ip
+    public $dbUserName = 'radwa';      // server acess username
+    public $dbUserNamePass = 'Mamanashwa213!';      // the password of the specified username, in this case there's no password, http://localhost/phpmyadmin/server_privileges.php?viewing_mode=server formore info
+    public $dbName = 'db';     // database name
     private $dbConnection;
     public static $instance;
 
@@ -17,7 +17,7 @@ class DBConnection
     {
         $this->dbConnection = mysqli_connect($this->serverName, $this->dbUserName, $this->dbUserNamePass, $this->dbName);
         if (!$this->dbConnection) {
-            // echo "failed";
+            echo"Failed to connect";
             die();
         }
     }
