@@ -5,7 +5,7 @@ class DBConnection
     public $serverName = 'scandiwebtask.database.windows.net'; // server ip
     public $dbUserName = 'radwa';      // server acess username
     public $dbUserNamePass = 'Mamanashwa213!';      // the password of the specified username, in this case there's no password, http://localhost/phpmyadmin/server_privileges.php?viewing_mode=server formore info
-    public $dbName = 'db';     // database name
+    public $dbName = 'DB';     // database name
     private $dbConnection;
     public static $instance;
 

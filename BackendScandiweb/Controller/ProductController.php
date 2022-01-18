@@ -23,7 +23,9 @@ class ProductController
     public function getAllProduct()
     {
         $product = new Product();
+        echo"in";
         $result = $product->index();
+        echo"otu";
         // product resource
         $productCollection = new ProductCollection();
         $arr = $productCollection->json($result);

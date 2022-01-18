@@ -17,7 +17,6 @@ $uri = explode('/', $uri);
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $productController = new ProductController();
 if ($uri[2] == 'products' && $requestMethod == 'GET') {
-    echo "in";
     echo $productController->getAllProduct();
 } elseif ($uri[2] == 'products' && $requestMethod == 'POST') {
     $input = (array) json_decode(file_get_contents('php://input'), true);
