@@ -25,7 +25,7 @@ class ProductController
         $product = new Product();
         echo"in";
         $result = $product->index();
-        echo"otu";
+        echo"out";
         // product resource
         $productCollection = new ProductCollection();
         $arr = $productCollection->json($result);
