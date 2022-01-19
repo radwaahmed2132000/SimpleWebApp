@@ -1,6 +1,9 @@
 <?php
-
-class DeleteProductRequest
+interface DeleteProductRequestInterface
+{
+    public function validateDelete($input);
+}
+class DeleteProductRequest implements DeleteProductRequestInterface
 {
     /**
     * constructor of  delete product request

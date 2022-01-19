@@ -1,6 +1,10 @@
 <?php
 
-class AddProductRequest
+interface AddProductRequestInterface
+{
+    public function validateAdd($input);
+}
+class AddProductRequest implements AddProductRequestInterface
 {
     /**
     * constructor of  add product request

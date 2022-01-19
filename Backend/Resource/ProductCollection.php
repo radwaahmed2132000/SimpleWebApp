@@ -1,6 +1,9 @@
 <?php
-
-class ProductCollection
+interface ProductCollectionInterface
+{
+    public function json($input);
+}
+class ProductCollection implements ProductCollectionInterface
 {
     /**
     * constructor of   product collection

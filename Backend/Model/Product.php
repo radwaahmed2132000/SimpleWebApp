@@ -1,8 +1,14 @@
 <?php
 
 require_once 'connection.php';
-
-class Product
+interface ProductInterface
+{
+    public static function index();
+    public function store();
+    public static function delete($id);
+    public static function uniqueSku($sku);
+}
+class Product implements ProductInterface
 {
     /**
      *   @param string $sku
