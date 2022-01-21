@@ -336,11 +336,8 @@ export default ({
                     product.length =this.length;
                }
                console.log(JSON.stringify(product));
-               const headers = { 
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-               };
-          axios.post("http://127.0.0.1/BackendScandiweb/index.php/products",JSON.stringify(product),{headers})
+              
+          axios.post("https://scandiwebtaskradwabackend.azurewebsites.net/index.php/add",JSON.stringify(product))
           .then( response=> {
                // sku is already exist
                console.log(response.data.meta.msg);

@@ -119,7 +119,7 @@ export default ({
        {
            this.products =[];
           
-            axios.get('http://127.0.0.1/BackendScandiweb/index.php/products')
+            axios.get('https://scandiwebtaskradwabackend.azurewebsites.net/index.php/products')
            .then(response=>
                { 
                     this.data = response.data.response;
@@ -167,12 +167,9 @@ export default ({
                 )
            }
       
-           const headers = { 
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-           };
+          
         //    console.log(JSON.stringify(this.deletedIds));
-            axios.post("http://127.0.0.1/BackendScandiweb/index.php/del",JSON.stringify(this.deletedIds),{headers});
+            axios.post("https://scandiwebtaskradwabackend.azurewebsites.net/index.php/del",JSON.stringify(this.deletedIds));
     
            this.deletedIds=[];
              this.getAllProducts();
