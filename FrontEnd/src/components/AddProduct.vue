@@ -237,7 +237,7 @@ export default ({
                     this.invalid=true;
                     
                }
-               if(!this.SKU.match(/^[a-z0-9]{10,20}$/i)){
+               if(!this.SKU.match(/^[A-Z0-9]+$/i)){
                      this.invaliderrors++;
                     this.invalid=true;
                     
@@ -370,4 +370,5 @@ h2
 {
     margin-right:30%;
 }
+
 </style>

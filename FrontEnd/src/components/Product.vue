@@ -192,7 +192,10 @@ h2
 button{
     background: blue;
 }
-
+.delete-checkbox{
+    position: relative;
+    right: 40%;
+}
 
 </style>
 
