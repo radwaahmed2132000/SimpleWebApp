@@ -1,2 +1,7 @@
-"postinstall": "npm run build",
-"start": "node server.js"
+{
+    "root": "dist",
+    "clean_urls": true,
+    "routes": {
+      "/**": "index.html"
+    }
+  }

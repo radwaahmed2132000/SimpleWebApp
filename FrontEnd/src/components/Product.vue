@@ -32,31 +32,19 @@
                            
                             v-model="ids"
                             :value="product.id"
+                            :name="product.name"
                         >
-                    
+                         
                         </b-form-checkbox>
                         <br>
-                        <b-card-text v-if="product.type=='Furniture'">
-                          {{product.SKU}} <br>
-                          {{product.name}}<br>
-                         {{product.price}} $ <br>
-
-                          Dimension: {{product.width}}x{{product.height}}x{{product.length}}<br>
+                       
+                       <b-card-text>{{product.SKU}}</b-card-text>
+                        <b-card-text >{{product.name}}</b-card-text>
+                           <b-card-text >{{product.price}}</b-card-text>
+                        <b-card-text v-if="product.type=='DVD'">Size: {{product.size}} MB
                         </b-card-text>
-                          <b-card-text v-if="product.type=='DVD'">
-                          {{product.SKU}} <br>
-                          {{product.name}}<br>
-                          {{product.price}} $ <br>
-
-                          Size: {{product.size}} MB<br>
-                        </b-card-text>
-                         <b-card-text v-if="product.type=='Book'">
-                          {{product.SKU}} <br>
-                          {{product.name}}<br>
-                          {{product.price}} $ <br>
-
-                          Weight: {{product.weight}}KG<br>
-                        </b-card-text>
+                         <b-card-text v-if="product.type=='Furniture'" >Dimension: {{product.width}}x{{product.height}}x{{product.length}}</b-card-text>
+                         <b-card-text v-if="product.type=='Book'">Weight: {{product.weight}}KG</b-card-text>
 
                            <br>
                           </b-card>
@@ -158,6 +146,7 @@ export default ({
         */
       deleteProduct : function () {
            
+           console.log("ddd");
            for (let i=0;i< this.ids.length;i++){
                 // console.log(this.ids[i]);
                 this.deletedIds.push(

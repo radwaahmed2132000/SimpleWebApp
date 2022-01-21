@@ -30,7 +30,7 @@
        
        <LineProduct/>
       <b-container >
-         <b-form>
+         <b-form id="product_form">
            <b-row class="my-3">
                 <b-col lg="2">
                          <label for="sku">SKU</label>
@@ -69,7 +69,7 @@
                          <label for="size">Size (MB)</label>
                 </b-col>
                  <b-col lg="6">
-                      <b-form-input  id="price" v-model="size" min="1" placeholder="Enter your size" type="number"></b-form-input>
+                      <b-form-input  id="size" v-model="size" min="1" placeholder="Enter your size" type="number"></b-form-input>
                       <br>
                             <b-card-text> Please provide DVD size in mega bytes </b-card-text>
                 </b-col>
@@ -221,7 +221,7 @@ export default ({
         checkInvalid: function(){
                this.invalid= false;
                this.invaliderrors=0;
-                if(!this.name.match(/^[A-Za-z]+$/)){
+                if(!this.name.match(/^[A-Za-z\s]+$/)){
                     this.invalid= true;
                     this.invaliderrors++;
                    
