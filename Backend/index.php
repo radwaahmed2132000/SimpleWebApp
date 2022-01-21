@@ -16,12 +16,13 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $productController = new ProductController();
-if ($uri[2] == 'products' && $requestMethod == 'GET') {
+// 12 for server deployment
+if ($uri[12] == 'products' && $requestMethod == 'GET') {
     echo $productController->getAllProduct();
-} elseif ($uri[2] == 'products' && $requestMethod == 'POST') {
+} elseif ($uri[12] == 'add' && $requestMethod == 'POST') {
     $input = (array) json_decode(file_get_contents('php://input'), true);
     echo $productController->createProduct($input);
-} elseif ($uri[2] == 'del' && $requestMethod == 'POST') {
+} elseif ($uri[12] == 'del' && $requestMethod == 'POST') {
     $input =  json_decode(file_get_contents('php://input'), true);
      echo $productController->deleteProduct($input);
 }

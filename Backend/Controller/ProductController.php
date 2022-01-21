@@ -22,8 +22,7 @@ class ProductController
     */
     public function getAllProduct()
     {
-        $product = new Product();
-        $result = $product->index();
+        $result = Product::index();
         // product resource
         $productCollection = new ProductCollection();
         $arr = $productCollection->json($result);
@@ -40,8 +39,7 @@ class ProductController
             // validation of request of delete
             $deleteProduct = new DeleteProductRequest();
             if ($deleteProduct->validateDelete($ids[$i])) {
-                $product = new Product();
-                $product->delete($ids[$i]['id']);
+                Product::delete($ids[$i]['id']);
             } else {
                 return $this->errorResponse("The id field is required and should be numeric value", "422");
             }
@@ -55,21 +53,16 @@ class ProductController
      */
     public function createProduct($input)
     {
-        $product = new Product();
         $addProduct = new AddProductRequest();
         $result =  $addProduct->validateAdd($input);
+        $product = new Product($input);
         if (!$result) {
             return $this->errorResponse("Bad Request", "422");
         } else {
-            if (!$product->uniqueSku($input['sku'])) {
+            if (!Product::uniqueSku($input['sku'])) {
                 return $this->errorResponse("This sku is already exist", "422");
-            }
-            if ($input['type'] == 'DVD') {
-                $product->store($input['sku'], $input['name'], $input['price'], $input['type'], 0, 0, 0, $input['size'], 0);
-            } elseif ($input['type'] == 'Book') {
-                $product->store($input['sku'], $input['name'], $input['price'], $input['type'], 0, 0, 0, 0, $input['weight']);
-            } elseif ($input['type'] == 'Furniture') {
-                $product->store($input['sku'], $input['name'], $input['price'], $input['type'], $input['width'], $input['height'], $input['length'], 0, 0);
+            } else {
+                     $product ->store();
             }
         }
         return $this->generalResponse("", "ok");
