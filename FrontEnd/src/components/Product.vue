@@ -6,10 +6,10 @@
                       <h2>Product List</h2>
                 </div>
                 <div class="col-lg-4 buttons">
-                    <b-button >
-                         <router-link to="/AddProduct">
+                    <b-button v-on:click="addNewProduct()">
+                         
                             ADD
-                        </router-link>
+                      
                     </b-button>
                      
                     <b-button v-on:click="deleteProduct()" id="delete-product-btn">MASS DELETE</b-button>
@@ -70,6 +70,7 @@
 
 import LineProduct from './LineProduct.vue';
 import axios from 'axios';
+
 
 export default ({
     name: 'Product',
@@ -162,6 +163,11 @@ export default ({
     
            this.deletedIds=[];
              this.getAllProducts();
+       },
+       addNewProduct:function()
+       {
+            this.$router.push("/AddProduct");
+          
        }
        
     },

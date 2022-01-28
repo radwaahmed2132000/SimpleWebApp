@@ -6,18 +6,10 @@
                       <h2>Product Add</h2>
                 </div>
                 <div class="col-lg-4">
-                     <b-button v-on:click="addProduct()"  class="mx-3">
-                           Save
-<!--                       
-                         <router-link to="/">
-                            Save
-                        </router-link> -->
-                     </b-button>
-                    <b-button class="mx-2" >
-                         <router-link to="/">
-                            Cancel
-                        </router-link>
-                    </b-button>
+                     <b-button v-on:click="addProduct()">Save</b-button>
+        
+                      <b-button v-on:click="cancelProduct()">Cancel</b-button>
+                  
                      
                    
                 </div>
@@ -95,7 +87,7 @@
            </b-row>
            <b-row class="my-3" v-if="type=='Furniture'">
                  <b-col lg="2">
-                         <label for="width">Widtht (CM)</label>
+                         <label for="width">Width (CM)</label>
                 </b-col>
                  <b-col lg="6">
                       <b-form-input  id="width" v-model="width" min="1" placeholder="Enter your width" type="number" ></b-form-input>
@@ -185,6 +177,14 @@ export default ({
          };
     },
      methods :{
+           /**
+           *  cancel product
+           * @return void
+           */
+          cancelProduct:function()
+          {
+                 this.$router.push("/");
+          },
           /**
            *  check inputs fields if not empty
            * @return void
@@ -237,7 +237,7 @@ export default ({
                     this.invalid=true;
                     
                }
-               if(!this.SKU.match(/^[A-Z0-9]+$/i)){
+               if(!this.SKU.match(/^[a-zA-Z0-9-]+$/i)){
                      this.invaliderrors++;
                     this.invalid=true;
                     
@@ -369,6 +369,13 @@ export default ({
 h2
 {
     margin-right:30%;
+}
+button
+{
+     margin: 5%;
+     border-radius: 5px 5px;
+     padding: 2% 2%;
+     background-color: #e7e7e7;
 }
 
 </style>
