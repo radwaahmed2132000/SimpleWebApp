@@ -28,15 +28,15 @@
                            
                          <b-card-group >  
                            <b-card  >  
-                             
-                                <b-form-checkbox class="delete-checkbox"
+                               <input type="checkbox" :name="product.name" v-model="ids" :value="product.id" class="delete-checkbox"  >
+                                <!-- <b-form-checkbox class="delete-checkbox"
                            
                             v-model="ids"
                             :value="product.id"
                             :name="product.name"
-                        >
+                        > -->
                          
-                        </b-form-checkbox>
+                        <!-- </b-form-checkbox> -->
                         <br>
                        
                        <b-card-text>{{product.SKU}}</b-card-text>
@@ -71,6 +71,7 @@
 
 import LineProduct from './LineProduct.vue';
 import axios from 'axios';
+
 
 
 export default ({
@@ -150,15 +151,20 @@ export default ({
            
            console.log(this.ids[0]);
            for (let i=0;i< this.ids.length;i++){
+               console.log(this.ids[i]);
                 this.deletedIds.push(
                     {
                         "id":this.ids[i]
                     }
                 )
            }
-      
-            axios.post("https://newoneagainadkjdkw.azurewebsites.net/index.php/del",JSON.stringify(this.deletedIds));
-      location.reload();
+    //    console.log(this.deletedIds);
+            axios.post("https://newoneagainadkjdkw.azurewebsites.net/index.php/del",JSON.stringify(this.deletedIds))
+            .then( response=>{
+                          this.status= response.data.meta.status;
+                          console.log(this.status);                }
+            );
+     location.reload();
          
             
        },
