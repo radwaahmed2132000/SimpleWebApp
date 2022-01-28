@@ -49,9 +49,9 @@ class AddProductRequest implements AddProductRequestInterface
             if (empty($input['sku'])) {
                 return false;
             }
-            if (!preg_match('^[a-z0-9A-Z]{10,20}$^', $input['sku'])) {
-                return false;
-            }
+            // if (!preg_match('^[a-z0-9A-Z]{10,20}$^', $input['sku'])) {
+            //     return false;
+            // }
         } else {
             return false;
         }

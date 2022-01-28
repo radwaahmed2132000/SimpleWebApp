@@ -6,13 +6,13 @@
                       <h2>Product List</h2>
                 </div>
                 <div class="col-lg-4 buttons">
-                    <b-button v-on:click="addNewProduct()">
+                    <button @click="addNewProduct()">
                          
                             ADD
                       
-                    </b-button>
+                    </button>
                      
-                    <b-button v-on:click="deleteProduct()" id="delete-product-btn">MASS DELETE</b-button>
+                    <button @click="deleteProduct()" id="delete-product-btn">MASS DELETE</button>
                 </div>
              
     
@@ -28,6 +28,7 @@
                            
                          <b-card-group >  
                            <b-card  >  
+                             
                                 <b-form-checkbox class="delete-checkbox"
                            
                             v-model="ids"
@@ -147,9 +148,8 @@ export default ({
         */
       deleteProduct : function () {
            
-           console.log("ddd");
+           console.log(this.ids[0]);
            for (let i=0;i< this.ids.length;i++){
-                // console.log(this.ids[i]);
                 this.deletedIds.push(
                     {
                         "id":this.ids[i]
@@ -157,12 +157,10 @@ export default ({
                 )
            }
       
-          
-        //    console.log(JSON.stringify(this.deletedIds));
             axios.post("https://newoneagainadkjdkw.azurewebsites.net/index.php/del",JSON.stringify(this.deletedIds));
-    
-           this.deletedIds=[];
-             this.getAllProducts();
+      location.reload();
+         
+            
        },
        addNewProduct:function()
        {

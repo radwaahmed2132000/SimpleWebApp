@@ -6,9 +6,9 @@
                       <h2>Product Add</h2>
                 </div>
                 <div class="col-lg-4">
-                     <b-button v-on:click="addProduct()">Save</b-button>
+                     <button @click="addProduct()">Save</button>
         
-                      <b-button v-on:click="cancelProduct()">Cancel</b-button>
+                      <button @click="cancelProduct()">Cancel</button>
                   
                      
                    
@@ -168,7 +168,7 @@ export default ({
                 * type attribute
                 * @value DVD , Book ,  Furniture
                 */ 
-            type: 'DVD',
+            type: '',
             options: [
             { value: 'DVD', text: 'DVD' },
             { value: 'Book', text: 'Book' },
@@ -210,6 +210,10 @@ export default ({
                     this.missingerrors++;
 
                }
+               else if(this.type=="") {
+                      this.missing=true;
+                    this.missingerrors++;
+               }
                if( this.missingerrors==0){
                     this.missing=false;
                }          
@@ -221,13 +225,13 @@ export default ({
         checkInvalid: function(){
                this.invalid= false;
                this.invaliderrors=0;
-                if(!this.name.match(/^[A-Za-z\s]+$/)){
+                if(!this.name.match(/^[A-Za-z0-9\s]+$/)){
                     this.invalid= true;
                     this.invaliderrors++;
                    
                   
                }
-               if(!String(this.price).match(/^[0-9]+$/)){
+               if(!String(this.price).match(/^[0-9.]+$/)){
                     this.invaliderrors++;
                     this.invalid=true;
                      
@@ -237,13 +241,13 @@ export default ({
                     this.invalid=true;
                     
                }
-               if(!this.SKU.match(/^[a-zA-Z0-9-]+$/i)){
+               if(!this.SKU.match(/^[a-zA-Z0-9-]*$/)){
                      this.invaliderrors++;
                     this.invalid=true;
                     
                }
                if(this.type=='DVD'){
-                    if(!String(this.size).match(/^[0-9]+$/)){
+                    if(!String(this.size).match(/^[0-9.]+$/)){
                             this.invaliderrors++;
                     this.invalid=true;
                      
@@ -255,7 +259,7 @@ export default ({
                     }
                }
                if(this.type=='Book'){
-                     if(!String(this.weight).match(/^[0-9]+$/)){
+                     if(!String(this.weight).match(/^[0-9.]+$/)){
                             this.invaliderrors++;
                     this.invalid=true;
                     }
@@ -266,7 +270,7 @@ export default ({
 
                }
                if(this.type=='Furniture'){
-                     if(!String(this.width).match(/^[0-9]+$/)){
+                     if(!String(this.width).match(/^[0-9.]+$/)){
                             this.invaliderrors++;
                     this.invalid=true;
                   
@@ -276,7 +280,7 @@ export default ({
                     this.invalid=true;
                     
                     }
-                     if(!String(this.height).match(/^[0-9]+$/)){
+                     if(!String(this.height).match(/^[0-9.]+$/)){
                             this.invaliderrors++;
                     this.invalid=true;
                
@@ -285,7 +289,7 @@ export default ({
                             this.invaliderrors++;
                     this.invalid=true;
                     }
-                     if(!String(this.length).match(/^[0-9]+$/)){
+                     if(!String(this.length).match(/^[0-9.]+$/)){
                             this.invaliderrors++;
                     this.invalid=true;
                     }
