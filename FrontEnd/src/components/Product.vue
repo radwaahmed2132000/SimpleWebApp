@@ -164,10 +164,12 @@ export default ({
                           this.status= response.data.meta.status;
                           console.log(this.status);                }
             );
-     location.reload();
+            this.products=[];
+     this.getAllProducts();
          
-            
+           
        },
+       
        addNewProduct:function()
        {
             this.$router.push("/AddProduct");
@@ -179,7 +181,8 @@ export default ({
   mounted () {
     this.getAllProducts()
 }
- , 
+ ,
+ 
 })
 </script>
 <style  >
