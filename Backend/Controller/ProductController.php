@@ -5,13 +5,8 @@
  require_once('./Request/DeleteProductRequest.php');
  require_once('./Request/AddProductRequest.php');
  require_once('./Resource/ProductCollection.php');
-interface ProductControllerInterface
-{
-    public function getAllProduct();
-    public function deleteProduct($ids);
-    public function createProduct($input);
-}
-class ProductController implements ProductControllerInterface
+ require_once('ProductControllerLogic.php');
+class ProductController extends ProductControllerLogic
 {
     use WebServiceResponse;
 
