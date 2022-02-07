@@ -1,14 +1,9 @@
 <?php
 
 require_once 'connection.php';
-interface ProductInterface
-{
-    public static function index();
-    public function store();
-    public static function delete($id);
-    public static function uniqueSku($sku);
-}
-class Product implements ProductInterface
+require_once 'AllProduct.php';
+
+class Product extends AllProduct
 {
     /**
      *   @param string $sku
@@ -53,7 +48,7 @@ class Product implements ProductInterface
     */
     public static function index()
     {
-        $product = DBConnection::getInst()->getConnection()->query("SELECT * FROM  products");
+        $product = sqlsrv_query(DBConnection::getInst()->getConnection(), "SELECT * FROM  products");
         return $product;
     }
     /**
@@ -62,8 +57,8 @@ class Product implements ProductInterface
      */
     public function store()
     {
-        $product = DBConnection::getInst()->getConnection()->
-        query("INSERT INTO products (sku,name,price,type,width,height,length,size,weight)
+        $product =  sqlsrv_query(DBConnection::getInst()->getConnection(), "INSERT INTO products 
+        (sku,name,price,type,width,height,length,size,weight)
           VALUES('$this->sku' ,
           '$this->name',
           '$this->price',
@@ -82,7 +77,7 @@ class Product implements ProductInterface
     */
     public static function delete($id)
     {
-        DBConnection::getInst()->getConnection()->query("DELETE FROM products WHERE id='$id'");
+        sqlsrv_query(DBConnection::getInst()->getConnection(), "DELETE FROM products WHERE id='$id'");
     }
      /**
      * check unique of sku in products
@@ -91,10 +86,11 @@ class Product implements ProductInterface
     */
     public static function uniqueSku($sku)
     {
-        $product = DBConnection::getInst()->getConnection()->query("SELECT COUNT(*) FROM products WHERE sku='$sku'");
-        $totalcount = $product->fetch_assoc();
-        if ($totalcount['COUNT(*)'] > 0) {
-            return false;
+        $product =  sqlsrv_query(DBConnection::getInst()->getConnection(), "SELECT COUNT(*) FROM products");
+        while ($row = sqlsrv_fetch_array($product, SQLSRV_FETCH_ASSOC)) {
+            if ($row['COUNT(*)'] > 0) {
+                        return false;
+            }
         }
         return true;
     }
