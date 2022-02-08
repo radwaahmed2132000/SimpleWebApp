@@ -86,9 +86,9 @@ class Product extends AllProduct
     */
     public static function uniqueSku($sku)
     {
-        $product =  sqlsrv_query(DBConnection::getInst()->getConnection(), "SELECT COUNT(*) FROM products");
+        $product =  sqlsrv_query(DBConnection::getInst()->getConnection(), "SELECT * FROM products");
         while ($row = sqlsrv_fetch_array($product, SQLSRV_FETCH_ASSOC)) {
-            if ($row['COUNT(*)'] > 0) {
+            if ($row['sku'] == $sku) {
                         return false;
             }
         }

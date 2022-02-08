@@ -23,18 +23,18 @@
            
                <div class="container mb-5">
                    <div class="row">
-                      
+                 
                        <div class="col-lg-3 my-2"  v-for="product in products" :key="product.id"  >
                            
                          <b-card-group >  
                            <b-card  >  
-                               <input type="checkbox" :name="product.name" v-model="ids" :value="product.id" class="delete-checkbox"  >
+                               <input type="checkbox" :name="product.name" v-model="ids" :value="product.id" class="delete-checkbox"  > 
                                 <!-- <b-form-checkbox class="delete-checkbox"
                            
                             v-model="ids"
                             :value="product.id"
                             :name="product.name"
-                        > -->
+                        >  -->
                          
                         <!-- </b-form-checkbox> -->
                         <br>
@@ -52,7 +52,7 @@
                            </b-card-group >
                        </div>
                     
-            
+                    
                    </div>
                </div>
                 
@@ -108,9 +108,9 @@ export default ({
          */
        getAllProducts : function()
        {
-           this.products =[];
+        
           
-            axios.get('https://newoneagainadkjdkw.azurewebsites.net/index.php/products')
+            axios.get('https://scandiwebtaskradwa.000webhostapp.com/index.php/products')
            .then(response=>
                { 
                     this.data = response.data.response;
@@ -148,27 +148,36 @@ export default ({
         * @return void
         */
       deleteProduct : function () {
-           
-           console.log(this.ids[0]);
-           for (let i=0;i< this.ids.length;i++){
-               console.log(this.ids[i]);
-                this.deletedIds.push(
-                    {
-                        "id":this.ids[i]
-                    }
-                )
-           }
-    //    console.log(this.deletedIds);
-            axios.post("https://newoneagainadkjdkw.azurewebsites.net/index.php/del",JSON.stringify(this.deletedIds))
+         let checkboxes = document.getElementsByClassName('delete-checkbox');
+            for (let i=0; i<checkboxes.length;i++){
+              
+                if(checkboxes[i].checked==true)
+                {
+                    this.deletedIds.push(
+                        {
+                            "id": checkboxes[i].value
+                        }
+                    )
+                }
+            }
+      
+    
+            axios.post("https://scandiwebtaskradwa.000webhostapp.com/index.php/del",JSON.stringify(this.deletedIds))
             .then( response=>{
                           this.status= response.data.meta.status;
-                          console.log(this.status);                }
+                          console.log(this.status);            
+                                 this.products=[];
+                      this.getAllProducts();
+                          
+                          
+                          }
             );
-            this.products=[];
-     this.getAllProducts();
-         
+           
+     
+        
            
        },
+    
        
        addNewProduct:function()
        {

@@ -341,7 +341,7 @@ export default ({
                }
                console.log(JSON.stringify(product));
               
-          axios.post("https://newoneagainadkjdkw.azurewebsites.net/index.php/add",JSON.stringify(product))
+          axios.post("https://scandiwebtaskradwa.000webhostapp.com/index.php/products",JSON.stringify(product))
           .then( response=> {
                // sku is already exist
                console.log(response.data.meta.msg);
