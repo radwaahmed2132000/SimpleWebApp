@@ -5,8 +5,7 @@
  require_once('./Request/DeleteProductRequest.php');
  require_once('./Request/AddProductRequest.php');
  require_once('./Resource/ProductCollection.php');
- require_once('ProductControllerLogic.php');
-class ProductController extends ProductControllerLogic
+class ProductController
 {
     use WebServiceResponse;
 
@@ -56,16 +55,10 @@ class ProductController extends ProductControllerLogic
     {
         $addProduct = new AddProductRequest();
         $result =  $addProduct->validateAdd($input);
-        $product = new Product($input);
         if (!$result) {
             return $this->errorResponse("Bad Request", "422");
         } else {
-            if (!Product::uniqueSku($input['sku'])) {
-                return $this->errorResponse("This sku is already exist", "422");
-            } else {
-                     $product ->store();
-            }
+            return $this->generalResponse("", "ok");
         }
-        return $this->generalResponse("", "ok");
     }
 }

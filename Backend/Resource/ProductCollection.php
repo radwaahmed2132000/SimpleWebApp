@@ -20,8 +20,7 @@ class ProductCollection implements ProductCollectionInterface
     public function json($result)
     {
         $arr = [];
-         
-            while ($row = sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC)) {
+            while ($row = $result->fetch_assoc()) {
                 $response = [];
                 //create resources of product
                 $response['name'] = $row ['name'];

@@ -16,7 +16,7 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $productController = new ProductController();
-// 12 for server deployment
+// 2 for server deployment
 if ($uri[2] == 'products' && $requestMethod == 'GET') {
     echo $productController->getAllProduct();
 } elseif ($uri[2] == 'products' && $requestMethod == 'POST') {
