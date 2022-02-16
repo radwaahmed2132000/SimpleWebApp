@@ -1,5 +1,5 @@
 CREATE TABLE products(
- id integer NOT NULL IDENTITY(1, 1) ,
+ id integer NOT NULL  AUTO_INCREMENT ,
    sku text ,
     name text,
     price integer,
@@ -8,6 +8,6 @@ CREATE TABLE products(
     height integer default null,
     length integer default null,
    size integer default null,
-   type text
+   type text,
     primary key(id)
 );

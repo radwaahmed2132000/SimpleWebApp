@@ -5,11 +5,7 @@ require_once('./Request/AddProductRequest.php');
 require_once 'connection.php';
 class Book extends Product 
 {
-     /**
-     *  @param int $weight
-     */
     protected $input;
-    private $weight;
 
      /**
     * constructor of Book
@@ -37,21 +33,6 @@ class Book extends Product
         } else {
             return false;
         }
-        $this->weight = $this->input['weight'];
         return true;
-    }
-     /**
-     * create new  book
-     *  @return void
-     */
-    public function store()
-    {
-        $product = DBConnection::getInst()->getConnection()->
-        query("INSERT INTO products (sku,name,price,type,weight)
-          VALUES('$this->sku' ,
-          '$this->name',
-          '$this->price',
-          '$this->type',
-          '$this->weight')");
     }
 }

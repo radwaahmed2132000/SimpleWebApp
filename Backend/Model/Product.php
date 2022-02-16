@@ -65,7 +65,18 @@ abstract class Product
      * create new product
      *  @return void
      */
-    abstract public function store();
+    public function store()
+    {
+        $keys = array_keys($this->input);
+        $values = array();
+        foreach ($keys as $key) {
+            array_push($values, $this->input[$key]);
+        }
+
+        $value = "'" . implode("', '", $values) . "'";
+        $product  = DBConnection::getInst()->getConnection()->query("INSERT INTO products (" . implode(', ', $keys) . ") VALUES (" . $value . ")");
+        return true;
+    }
     /**
      * check product type validation
      *  @return bool
